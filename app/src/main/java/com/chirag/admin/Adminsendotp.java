@@ -6,6 +6,7 @@ import android.os.CountDownTimer;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +29,7 @@ public class Adminsendotp extends BaseActivity {
     String verificationId;
     FirebaseAuth FAuth;
     Button verify , Resend ;
+    ImageView back;
     TextView txt;
     EditText entercode;
     String phoneno;
@@ -43,6 +45,7 @@ public class Adminsendotp extends BaseActivity {
         txt = (TextView) findViewById(R.id.text);
         Resend = (Button)findViewById(R.id.Resendotp);
         verify = (Button) findViewById(R.id.Verify);
+        back=(ImageView)findViewById(R.id.backBtn) ;
         FAuth = FirebaseAuth.getInstance();
 
         Resend.setVisibility(View.INVISIBLE);
@@ -114,6 +117,13 @@ public class Adminsendotp extends BaseActivity {
 
                     }
                 }.start();
+            }
+        });
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Adminsendotp.this, MainMenu.class));
+                finish();
             }
         });
 

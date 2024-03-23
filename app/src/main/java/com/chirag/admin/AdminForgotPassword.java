@@ -1,6 +1,6 @@
 package com.chirag.admin;
 
-import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -19,7 +19,7 @@ public class AdminForgotPassword extends BaseActivity {
     private ProgressBar mProgressBar;
     private FirebaseAuth mAuth;
 
-    @SuppressLint("MissingInflatedId")
+ //   @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,11 +43,18 @@ public class AdminForgotPassword extends BaseActivity {
 
             resetPassword(email);
         });
+
+        // Implementing back button functionality
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainMenu.class);
+            startActivity(intent);
+            onBackPressed();
+        });
     }
 
     private void resetPassword(String email) {
         mAuth.sendPasswordResetEmail(email)
-               .addOnCompleteListener(task -> {
+                .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         Toast.makeText(this, "Reset password email sent", Toast.LENGTH_SHORT).show();
                         mResetPasswordButton.setEnabled(true);

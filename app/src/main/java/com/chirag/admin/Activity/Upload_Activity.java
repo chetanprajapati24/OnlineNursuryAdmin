@@ -175,7 +175,8 @@ public class Upload_Activity extends AppCompatActivity {
                                     double star = Double.parseDouble(Star);
                                     int categoryId = Integer.parseInt(CategoryId);
 
-                                    Foods food = new Foods();
+                                    Foods food;
+                                    food = new Foods();
                                     food.setTitle(Title);
                                     food.setDescription(Description);
                                     food.setPrice(Double.parseDouble(Price));

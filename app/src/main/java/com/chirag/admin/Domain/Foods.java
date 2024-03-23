@@ -1,3 +1,5 @@
+// Foods.java
+
 package com.chirag.admin.Domain;
 
 import java.io.Serializable;
@@ -5,7 +7,8 @@ import java.io.Serializable;
 public class Foods implements Serializable {
     private int CategoryId;
     private String Description;
-    private  boolean BestFood =true;
+    private String Key;
+    private boolean BestFood = true;
     private int Id;
     private int LocationId;
     private double Price;
@@ -21,6 +24,16 @@ public class Foods implements Serializable {
     }
 
     public Foods() {
+        // Default constructor
+    }
+
+    // Getters and setters
+    public String getKey() {
+        return Key;
+    }
+
+    public void setKey(String key) {
+        this.Key = key;
     }
 
     public int getCategoryId() {
@@ -55,7 +68,8 @@ public class Foods implements Serializable {
         Id = id;
     }
 
-    public int getLocationId (){return LocationId;
+    public int getLocationId() {
+        return LocationId;
     }
 
     public void setLocationId(int locationId) {
@@ -94,7 +108,6 @@ public class Foods implements Serializable {
         this.Star = star;
     }
 
-
     public String getTitle() {
         return Title;
     }
@@ -105,9 +118,5 @@ public class Foods implements Serializable {
 
     public int getNumberInCart() {
         return numberInCart;
-    }
-
-    public void setNumberInCart(int numberInCart) {
-        this.numberInCart = numberInCart;
     }
 }

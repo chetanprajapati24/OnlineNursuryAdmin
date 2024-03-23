@@ -17,9 +17,11 @@ import java.util.List;
 
 public class AdminHomeAdapter extends RecyclerView.Adapter<AdminHomeAdapter.ViewHolder> {
     private List<Foods> food;
+    private String key;
 
     public AdminHomeAdapter(List<Foods> foodsList) {
         this.food = foodsList;
+        this.key = key;
     }
 
     @NonNull
@@ -31,15 +33,18 @@ public class AdminHomeAdapter extends RecyclerView.Adapter<AdminHomeAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+
         Foods foods = this.food.get(position);
         holder.titleTextView.setText(foods.getTitle());
         holder.descriptionTextView.setText(foods.getDescription());
         holder.priceTextView.setText(String.valueOf(foods.getPrice()));
+
         // Set other data
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), UpdateDeleteActivity.class);
+                intent.putExtra("key", key);
                 intent.putExtra("title", foods.getTitle());
                 intent.putExtra("description", foods.getDescription());
                 intent.putExtra("price", foods.getPrice());
