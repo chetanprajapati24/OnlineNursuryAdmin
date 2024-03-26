@@ -9,11 +9,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.chirag.admin.Domain.Foods;
 import com.chirag.admin.R;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class UpdateDeleteActivity extends AppCompatActivity {
 
@@ -59,16 +61,20 @@ public class UpdateDeleteActivity extends AppCompatActivity {
         String title = titleEditText.getText().toString();
         String description = descriptionEditText.getText().toString();
         double price = Double.parseDouble(priceEditText.getText().toString());
+        double star = Double.parseDouble(ratingEditText.getText().toString());
 
         if (key != null) {
             DatabaseReference foodRef = databaseReference.child("Foods").child(key);
 
-            Foods updatedFood = new Foods();
-            updatedFood.setTitle(title);
-            updatedFood.setDescription(description);
-            updatedFood.setPrice(price);
+            // Create a map to hold the updated fields
+            Map<String, Object> updates = new HashMap<>();
+            updates.put("title", title);
+            updates.put("description", description);
+            updates.put("price", price);
+            updates.put("star", star);
 
-            foodRef.setValue(updatedFood, new DatabaseReference.CompletionListener() {
+            // Update the specific fields without overwriting others
+            foodRef.updateChildren(updates, new DatabaseReference.CompletionListener() {
                 @Override
                 public void onComplete(@NonNull DatabaseError error, @NonNull DatabaseReference ref) {
                     if (error == null) {
@@ -83,4 +89,5 @@ public class UpdateDeleteActivity extends AppCompatActivity {
             Toast.makeText(UpdateDeleteActivity.this, "Null key received", Toast.LENGTH_SHORT).show();
         }
     }
+
 }

@@ -1,4 +1,3 @@
-// Foods.java
 
 package com.chirag.admin.Domain;
 

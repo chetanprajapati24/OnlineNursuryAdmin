@@ -71,6 +71,9 @@ public class AdminHomeFragment extends Fragment {
                 // Iterate through each child node
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     Foods food = snapshot.getValue(Foods.class);
+                    if(food != null){
+                        food.setKey(snapshot.getKey());
+                    }
                     foods.add(food);
                 }
                 adapter.notifyDataSetChanged();

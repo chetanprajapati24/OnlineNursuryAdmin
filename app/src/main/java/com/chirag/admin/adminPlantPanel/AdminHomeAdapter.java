@@ -17,11 +17,9 @@ import java.util.List;
 
 public class AdminHomeAdapter extends RecyclerView.Adapter<AdminHomeAdapter.ViewHolder> {
     private List<Foods> food;
-    private String key;
 
     public AdminHomeAdapter(List<Foods> foodsList) {
         this.food = foodsList;
-        this.key = key;
     }
 
     @NonNull
@@ -44,7 +42,7 @@ public class AdminHomeAdapter extends RecyclerView.Adapter<AdminHomeAdapter.View
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), UpdateDeleteActivity.class);
-                intent.putExtra("key", key);
+                intent.putExtra("key", foods.getKey());
                 intent.putExtra("title", foods.getTitle());
                 intent.putExtra("description", foods.getDescription());
                 intent.putExtra("price", foods.getPrice());
@@ -66,6 +64,7 @@ public class AdminHomeAdapter extends RecyclerView.Adapter<AdminHomeAdapter.View
         TextView titleTextView;
         TextView descriptionTextView;
         TextView priceTextView;
+        TextView ratingTextView;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -73,6 +72,7 @@ public class AdminHomeAdapter extends RecyclerView.Adapter<AdminHomeAdapter.View
                 titleTextView = itemView.findViewById(R.id.titleTxt);
                 descriptionTextView = itemView.findViewById(R.id.descriptionTxt);
                 priceTextView = itemView.findViewById(R.id.priceTxt);
+                ratingTextView=itemView.findViewById(R.id.ratingTxt);
             }
         }
     }
