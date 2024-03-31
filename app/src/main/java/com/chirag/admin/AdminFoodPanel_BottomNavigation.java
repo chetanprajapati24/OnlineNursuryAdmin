@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import com.chirag.admin.adminPlantPanel.AdminHomeFragment;
-import com.chirag.admin.adminPlantPanel.AdminOrderfragment;
-import com.chirag.admin.adminPlantPanel.AdminPendingOrderFragment;
+
+import com.chirag.admin.adminPlantPanel.AdminOrderFragment;
 import com.chirag.admin.adminPlantPanel.AdminProfileFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -29,13 +29,13 @@ public class AdminFoodPanel_BottomNavigation extends AppCompatActivity implement
             if(name.equalsIgnoreCase("Orderpage")){
                 loadcheffragment(new AdminHomeFragment());
             }else if (name.equalsIgnoreCase("Confirmpage")){
-                loadcheffragment(new AdminOrderfragment());
+                loadcheffragment(new AdminOrderFragment());
 
             }else if (name.equalsIgnoreCase("AcceptOrderpage")){
-                loadcheffragment(new AdminOrderfragment());
+                loadcheffragment(new AdminOrderFragment());
 
             }else if (name.equalsIgnoreCase("Deliverepage")){
-                loadcheffragment(new AdminOrderfragment());
+                loadcheffragment(new AdminOrderFragment());
             }else{
                 loadcheffragment(new AdminHomeFragment());
             }
@@ -51,10 +51,9 @@ public class AdminFoodPanel_BottomNavigation extends AppCompatActivity implement
         Fragment fragment =null;
         if (item.getItemId() == R.id.chefHome) {
             fragment = new AdminHomeFragment();
-        } else if (item.getItemId() == R.id.PendingOrders) {
-            fragment = new AdminPendingOrderFragment();
-        } else if (item.getItemId() == R.id.Orders) {
-            fragment = new AdminOrderfragment();
+        }
+       else if (item.getItemId() == R.id.Orders) {
+            fragment = new AdminOrderFragment();
         } else if (item.getItemId() == R.id.chefProfile) {
             fragment = new AdminProfileFragment();
         }

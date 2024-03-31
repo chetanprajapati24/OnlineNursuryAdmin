@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.chirag.admin.R;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -23,7 +25,7 @@ public class UpdateDeleteActivity extends AppCompatActivity {
     private EditText descriptionEditText;
     private EditText priceEditText;
     private EditText ratingEditText;
-    private Button updateButton;
+    private Button updateButton, deleteButton;
     private DatabaseReference databaseReference;
     private String key;
 
@@ -37,6 +39,7 @@ public class UpdateDeleteActivity extends AppCompatActivity {
         priceEditText = findViewById(R.id.priceTxt);
         ratingEditText = findViewById(R.id.ratingTxt);
         updateButton = findViewById(R.id.btnUpdate);
+        deleteButton = findViewById(R.id.btnDelete);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
 
@@ -55,6 +58,13 @@ public class UpdateDeleteActivity extends AppCompatActivity {
                 updateFood();
             }
         });
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteFood();
+            }
+        });
+
     }
 
     private void updateFood() {
@@ -90,4 +100,24 @@ public class UpdateDeleteActivity extends AppCompatActivity {
         }
     }
 
+    private void deleteFood() {
+        if (key != null) {
+            DatabaseReference foodRef = databaseReference.child("Foods").child(key);
+
+            // Remove the item from the database
+            foodRef.removeValue().addOnCompleteListener(new OnCompleteListener<Void>() {
+                @Override
+                public void onComplete(@NonNull Task<Void> task) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(UpdateDeleteActivity.this, "Plany deleted successfully", Toast.LENGTH_SHORT).show();
+                        finish(); // Close the activity after successful deletion
+                    } else {
+                        Toast.makeText(UpdateDeleteActivity.this, "Failed to delete Plant: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+        } else {
+            Toast.makeText(UpdateDeleteActivity.this, "Null key received", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

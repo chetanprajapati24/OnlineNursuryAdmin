@@ -53,6 +53,7 @@ public class AdminHomeAdapter extends RecyclerView.Adapter<AdminHomeAdapter.View
 
             }
         });
+
     }
 
     @Override

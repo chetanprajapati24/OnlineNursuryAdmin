@@ -37,11 +37,22 @@
             android:inputType="numberDecimal"
             android:hint="Rating"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnUpdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/ratingTxt"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/blueish"
             android:text="Update"/>
 
-    </RelativeLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btnUpdate"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/red"
+            android:text="Delete"/>
+
+</RelativeLayout>

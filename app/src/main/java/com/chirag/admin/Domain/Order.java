@@ -1,9 +1,8 @@
-
 package com.chirag.admin.Domain;
 
 import java.io.Serializable;
 
-public class Foods implements Serializable {
+public class Order implements Serializable {
     private int CategoryId;
     private String Description;
     private String Key;
@@ -23,7 +22,7 @@ public class Foods implements Serializable {
         return Title;
     }
 
-    public Foods() {
+    public Order() {
         // Default constructor
     }
 
@@ -119,4 +118,5 @@ public class Foods implements Serializable {
     public int getNumberInCart() {
         return numberInCart;
     }
+
 }

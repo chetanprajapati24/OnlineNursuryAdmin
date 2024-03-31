@@ -7,9 +7,11 @@ import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -36,7 +38,8 @@ import java.io.File;
 
 public class Upload_Activity extends AppCompatActivity {
 
-    private EditText titleEditText, descriptionEditText, priceEditText, ratingEditText, categoryIdEditText , foodIdEditText;
+    private EditText titleEditText, descriptionEditText, priceEditText, ratingEditText;
+    private Spinner categorySpinner;
     private Button postButton;
     private ImageButton imageButton;
     CropImageView cropImageView;
@@ -63,11 +66,15 @@ public class Upload_Activity extends AppCompatActivity {
         descriptionEditText = findViewById(R.id.descriptionTxt);
         priceEditText = findViewById(R.id.price);
         ratingEditText = findViewById(R.id.ratingTxt);
-        categoryIdEditText = findViewById(R.id.categoryIdTxt);
-        foodIdEditText = findViewById(R.id.foodIdTxt);
+        categorySpinner = findViewById(R.id.categorySpinner);
         postButton = findViewById(R.id.post);
         imageButton = findViewById(R.id.image_upload);
         cropImageView = findViewById(R.id.crop_image_view);
+
+        // Setup adapter for the Spinner
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.Category, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner.setAdapter(adapter);
 
         postButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -163,17 +170,16 @@ public class Upload_Activity extends AppCompatActivity {
                                     String Description = descriptionEditText.getText().toString().trim();
                                     String Price = priceEditText.getText().toString().trim();
                                     String Star = ratingEditText.getText().toString().trim();
-                                    String CategoryId= categoryIdEditText.getText().toString().trim();
-                                    String Id = foodIdEditText.getText().toString().trim();
+                                    int Category = categorySpinner.getSelectedItemPosition();
 
-                                    if (Title.isEmpty() || Description.isEmpty() || Price.isEmpty() || Star.isEmpty() || CategoryId.isEmpty()|| Id.isEmpty()  ) {
+
+                                    if (Title.isEmpty() || Description.isEmpty() || Price.isEmpty() || Star.isEmpty()) {
                                         Toast.makeText(Upload_Activity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                                         return;
                                     }
 
                                     double price = Double.parseDouble(Price);
                                     double star = Double.parseDouble(Star);
-                                    int categoryId = Integer.parseInt(CategoryId);
 
                                     Foods food;
                                     food = new Foods();
@@ -181,8 +187,7 @@ public class Upload_Activity extends AppCompatActivity {
                                     food.setDescription(Description);
                                     food.setPrice(Double.parseDouble(Price));
                                     food.setStar(Double.parseDouble(Star));
-                                    food.setCategoryId(Integer.parseInt(CategoryId));
-                                    food.setId(Integer.parseInt(Id));
+                                    food.setCategoryId(Category);
                                     food.setImagePath(imageUrl);
 
                                     // Push data to Firebase Database
@@ -195,8 +200,7 @@ public class Upload_Activity extends AppCompatActivity {
                                                     descriptionEditText.setText("");
                                                     priceEditText.setText("");
                                                     ratingEditText.setText("");
-                                                    categoryIdEditText.setText("");
-                                                    foodIdEditText.setText("");
+
                                                 } else {
                                                     Toast.makeText(Upload_Activity.this, "Failed to upload data", Toast.LENGTH_SHORT).show();
                                                 }
