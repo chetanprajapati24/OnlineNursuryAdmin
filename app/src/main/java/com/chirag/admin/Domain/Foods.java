@@ -6,7 +6,7 @@ import java.io.Serializable;
 public class Foods implements Serializable {
     private int CategoryId;
     private String Description;
-    private String Key;
+    private String key;
 
     private boolean BestFood = true;
     private int Id;
@@ -29,11 +29,11 @@ public class Foods implements Serializable {
 
     // Getters and setters
     public String getKey() {
-        return Key;
+        return key;
     }
 
     public void setKey(String key) {
-        this.Key = key;
+        this.key = key;
     }
 
     public int getCategoryId() {

@@ -22,7 +22,7 @@
     </string-array>
     <string-array name="Category">
         <item> Indoor</item>
-        <item >Outdoor</item>
+        <item>Outdoor</item>
         <item> Vegetable</item>
         <item> Herb</item>
         <item> Flower</item>

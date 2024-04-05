@@ -3,8 +3,6 @@ package com.chirag.admin.adminPlantPanel;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -15,7 +13,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.chirag.admin.Domain.Order;
+import com.chirag.admin.Domain.Foods;
 import com.chirag.admin.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -43,22 +41,27 @@ public class AdminOrderFragment extends Fragment {
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         // Initialize Firebase Database reference
-        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("orders");
+        mDatabaseRef = FirebaseDatabase.getInstance().getReference().child("Orders");
 
         // Retrieve data from Firebase Database
         mDatabaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                List<Order> foodsList = new ArrayList<>();
+                List<Foods> orderList = new ArrayList<>();
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    Order food = snapshot.getValue(Order.class);
-                    if (food != null) {
-                        foodsList.add(food);
+                    Foods order = snapshot.getValue(Foods.class);
+                    if (order != null) {
+                        orderList.add(order);
                     }
                 }
                 // Set up the RecyclerView adapter
-                mAdapter = new OrderAdapter(foodsList, getContext());
-                mRecyclerView.setAdapter(mAdapter);
+                if (mAdapter == null) {
+                    mAdapter = new OrderAdapter(orderList, getActivity());
+                    mRecyclerView.setAdapter(mAdapter);
+                } else {
+                    //mAdapter.updateData(orderList);
+                    mAdapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -70,10 +73,5 @@ public class AdminOrderFragment extends Fragment {
         });
 
         return v;
-    }
-
-    @Override
-    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.report, menu);
     }
 }

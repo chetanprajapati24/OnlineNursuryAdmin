@@ -3,12 +3,22 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_title"
+            />
 
         <TextView
             android:id="@+id/titleTxt"
@@ -17,6 +27,8 @@
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@android:color/black"/>
+    </LinearLayout>
+
 
         <TextView
             android:id="@+id/descriptionTxt"
@@ -24,14 +36,28 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:textColor="@android:color/black"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/black"
+            android:src="@drawable/rupee" />
+
         <TextView
             android:id="@+id/priceTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="16sp"
             android:layout_below="@id/descriptionTxt"
-            android:layout_marginTop="8dp"/>
+            android:layout_marginTop="8dp"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+    </LinearLayout>
 
 
         <!-- Add other views as needed -->

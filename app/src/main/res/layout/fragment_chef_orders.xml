@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:menu="@menu/report">
+    >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Recycle_menu"

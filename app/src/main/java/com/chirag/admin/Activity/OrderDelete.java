@@ -1,5 +1,6 @@
 package com.chirag.admin.Activity;
 
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -19,7 +20,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.HashMap;
 import java.util.Map;
 
-public class UpdateDeleteActivity extends AppCompatActivity {
+public class OrderDelete extends AppCompatActivity {
 
     private EditText titleEditText;
     private EditText descriptionEditText;
@@ -32,13 +33,12 @@ public class UpdateDeleteActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_update_delete);
+        setContentView(R.layout.activity_order_delete);
 
         titleEditText = findViewById(R.id.titleTxt);
         descriptionEditText = findViewById(R.id.descriptionTxt);
         priceEditText = findViewById(R.id.priceTxt);
         ratingEditText = findViewById(R.id.ratingTxt);
-        updateButton = findViewById(R.id.btnUpdate);
         deleteButton = findViewById(R.id.btnDelete);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
@@ -88,15 +88,15 @@ public class UpdateDeleteActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull DatabaseError error, @NonNull DatabaseReference ref) {
                     if (error == null) {
-                        Toast.makeText(UpdateDeleteActivity.this, "Food updated successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrderDelete.this, "Food updated successfully", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        Toast.makeText(UpdateDeleteActivity.this, "Failed to update food: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrderDelete.this, "Failed to update food: " + error.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         } else {
-            Toast.makeText(UpdateDeleteActivity.this, "Null key received", Toast.LENGTH_SHORT).show();
+            Toast.makeText(OrderDelete.this, "Null key received", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -109,15 +109,15 @@ public class UpdateDeleteActivity extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<Void> task) {
                     if (task.isSuccessful()) {
-                        Toast.makeText(UpdateDeleteActivity.this, "Plant deleted successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrderDelete.this, "Plany deleted successfully", Toast.LENGTH_SHORT).show();
                         finish(); // Close the activity after successful deletion
                     } else {
-                        Toast.makeText(UpdateDeleteActivity.this, "Failed to delete Plant: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(OrderDelete.this, "Failed to delete Plant: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
             });
         } else {
-            Toast.makeText(UpdateDeleteActivity.this, "Null key received", Toast.LENGTH_SHORT).show();
+            Toast.makeText(OrderDelete.this, "Null key received", Toast.LENGTH_SHORT).show();
         }
     }
 }
